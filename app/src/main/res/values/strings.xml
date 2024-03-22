@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Mesurede niveaude glycémie  SamBett</string>
+    <string name="text">Mesure de niveau de \n glycémine</string>
+    <string name="tex2t">Est-ce que vous jeunez?</string>
+    <string name="valeur_mesur_e_en_mmol_l">Valeur mesurée (en mmol/l)</string>
+    <string name="consulter">CONSULTER</string>
+    <string name="non">Non</string>
+    <string name="oui">Oui</string>
+    <string name="Age">Votre âge :</string>
+    <string name="consulter1">Consulter</string>
+    <string name="threeDots">...</string>
+</resources>
