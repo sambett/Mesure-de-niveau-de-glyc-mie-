@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="40dp"
-        android:background="@android:drawable/alert_dark_frame" />
+        android:background="@drawable/line_shape" />
 
 
     <TextView
@@ -51,12 +51,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:padding="5dp"
         android:text="@string/tex2t"
-        android:gravity="center"
+        android:textColor="#100F0F"
         android:textSize="25sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
     <RadioGroup
 
         android:layout_width="match_parent"
@@ -82,6 +82,7 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
     </RadioGroup>
+
     <EditText
         android:id="@+id/etValeur"
         android:layout_width="match_parent"
@@ -89,6 +90,7 @@
         android:layout_marginTop="20dp"
         android:hint="@string/valeur_mesur_e_en_mmol_l"
         android:inputType="numberDecimal"
+        android:textColorHint="#434343"
         android:textSize="25sp" />
 
     <Button
@@ -113,8 +115,10 @@
         android:padding="40dp"
         android:text="@string/threeDots"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
+
+
 
 
 </LinearLayout>
