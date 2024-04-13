@@ -1,4 +1,4 @@
-package com.example.mesuredeniveaudeglycmiesambett;
+package com.example.mesuredeniveaudeglycmiesambett.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,12 +12,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mesuredeniveaudeglycmiesambett.R;
+import com.example.mesuredeniveaudeglycmiesambett.controller.Controller;
+
 public class MainActivity extends AppCompatActivity {
     private TextView tvAge, tvReponse;
     private SeekBar sbAge;
     private RadioButton rbtOui , rbtNon;
     private Button btnConsulter;
     private EditText etValeur;
+    private Controller controller ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         btnConsulter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                int age;
+                float valeur;
                 Log.i("Information", "button clicked");
                 boolean verifAge = false, verifValeur = false;
                 if(sbAge.getProgress()!=0)
@@ -55,50 +60,22 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Saisir votre valeur mesurée !", Toast.LENGTH_LONG).show();
                 if(verifAge && verifValeur)
                 {
-                    calculer();
+                   age = sbAge.getProgress();
+                   valeur = Float.valueOf((etValeur.getText().toString()));
+                   // "UserAction" View --> Controller
+                    controller.createPatient(age,valeur,rbtOui.isChecked());
+                    // Notify Controller -->View
+                    tvReponse.setText((controller.getReponse()));
                 }
+
             }
         });
     }
 
         //listener explicitly created that's why the method is private
-        public void calculer ()
-        {
-            int age = Integer.valueOf(sbAge.getProgress());
-            float valeurMesuree = Float.valueOf(etValeur.getText().toString());
-            boolean isFasting = rbtOui.isChecked();
-            if(isFasting) {
-                if (age >= 13) {
-                    if (valeurMesuree < 5.0)
-                        tvReponse.setText("Very Low Levels");
-                    else if (valeurMesuree >= 5.0 && valeurMesuree <= 7.2)
-                        tvReponse.setText("Normal Levels");
-                    else
-                        tvReponse.setText("Very High Levels");
-                } else if (age >= 6 && age <= 12) {
-                    if (valeurMesuree < 5.0)
-                        tvReponse.setText("Very Low Levels");
-                    else if (valeurMesuree >= 5.0 && valeurMesuree <= 10.0)
-                        tvReponse.setText("Normal Levels");
-                    else
-                        tvReponse.setText("Very High Levels");
-                } else if (age < 6) {
-                    if (valeurMesuree < 5.5)
-                        tvReponse.setText("Very Low Levels");
-                    else if (valeurMesuree >= 5.5 && valeurMesuree <= 10.0)
-                        tvReponse.setText("Normal Levels");
 
-                    else
-                        tvReponse.setText("Very High Levels");
-                }
-            } else {
-                if (valeurMesuree > 10.5)
-                    tvReponse.setText("Very High Levels");
-                else
-                    tvReponse.setText("Normal levels");
-            }
-        }
         private void init(){
+        controller = Controller.getInstance();
         tvAge = findViewById(R.id.tvAge);
         tvReponse = findViewById(R.id.tvReponse);
         sbAge = findViewById(R.id.sbAge);
