@@ -9,4 +9,7 @@
     <string name="Age">Votre âge :</string>
     <string name="consulter1">Consulter</string>
     <string name="threeDots">...</string>
+    <string name="Retour">RETOUR</string>
+    <string name="mdp">mot de passe\n</string>
+    <string name="email">email\n</string>
 </resources>

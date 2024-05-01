@@ -1,7 +1,9 @@
 package com.example.mesuredeniveaudeglycmiesambett.view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +18,9 @@ import com.example.mesuredeniveaudeglycmiesambett.R;
 import com.example.mesuredeniveaudeglycmiesambett.controller.Controller;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvAge, tvReponse;
+    private final String RESPONSE_key = "reponse";
+    private final int Request_Code = 1; // code de l'activite ConsultActivity
+    private TextView tvAge; //, tvReponse in consult activity
     private SeekBar sbAge;
     private RadioButton rbtOui , rbtNon;
     private Button btnConsulter;
@@ -65,19 +69,32 @@ public class MainActivity extends AppCompatActivity {
                    // "UserAction" View --> Controller
                     controller.createPatient(age,valeur,rbtOui.isChecked());
                     // Notify Controller -->View
-                    tvReponse.setText((controller.getReponse()));
+                    //tvReponse.setText((controller.getReponse()));
+                    Intent intent = new Intent(getApplicationContext(),ConsultActivity.class); //MainActivity.this is also correct
+                    intent.putExtra(RESPONSE_key ,controller.getReponse() );
+                    startActivityForResult(intent, Request_Code);
+
                 }
 
             }
         });
     }
 
-        //listener explicitly created that's why the method is private
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Request_Code)
+            if(resultCode == RESULT_CANCELED){
+                Toast.makeText(getApplicationContext(),"erruer, result code canceled",Toast.LENGTH_LONG).show();
+            }
+    }
+
+    //listener explicitly created that's why the method is private
 
         private void init(){
         controller = Controller.getInstance();
         tvAge = findViewById(R.id.tvAge);
-        tvReponse = findViewById(R.id.tvReponse);
+        //tvReponse = findViewById(R.id.tvReponse); in consult activity
         sbAge = findViewById(R.id.sbAge);
         btnConsulter = findViewById(R.id.btnConsulter);
         rbtNon = findViewById(R.id.rbtNon);
