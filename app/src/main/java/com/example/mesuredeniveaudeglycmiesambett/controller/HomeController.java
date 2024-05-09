@@ -40,8 +40,13 @@ import android.text.SpanWatcher;
             user=new User(email,password);
         }
 
-        public static User getUser() {
-            return user;
+        public String getUserEmail() {
+            return user.getUserEmail();
         }
+
+        public String getPassword() {
+            return user.getPassword();
+        }
+
 
     }

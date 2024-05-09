@@ -70,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     controller.createPatient(age,valeur,rbtOui.isChecked());
                     // Notify Controller -->View
                     //tvReponse.setText((controller.getReponse()));
-                    Intent intent = new Intent(getApplicationContext(),ConsultActivity.class); //MainActivity.this is also correct
-                    intent.putExtra(RESPONSE_key ,controller.getReponse() );
-                    startActivityForResult(intent, Request_Code);
+                    Intent intent = new Intent(getApplicationContext(), ConsultActivity.class); // Create a new Intent
+                    intent.putExtra(RESPONSE_key, controller.getReponse()); // Put extra data into the Intent
+                    startActivityForResult(intent, Request_Code); // Start the activity for result
+
 
                 }
 
@@ -81,13 +82,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Request_Code)
-            if(resultCode == RESULT_CANCELED){
-                Toast.makeText(getApplicationContext(),"erruer, result code canceled",Toast.LENGTH_LONG).show();
+        if (resultCode == Request_Code) { // Check if the resultCode matches the Request_Code
+            if (resultCode == RESULT_CANCELED) { // Check if the result is canceled
+                Toast.makeText(getApplicationContext(), "erruer, result code canceled", Toast.LENGTH_LONG).show(); // Display a toast message
             }
+        }
     }
+
 
     //listener explicitly created that's why the method is private
 

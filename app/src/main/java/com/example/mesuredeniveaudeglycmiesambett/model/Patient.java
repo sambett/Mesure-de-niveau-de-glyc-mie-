@@ -1,6 +1,13 @@
 package com.example.mesuredeniveaudeglycmiesambett.model;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class Patient {
+    private Date dateMesure;
     private int age;
     private float valeurMesuree;
     private boolean isFasting;
@@ -53,14 +60,56 @@ public class Patient {
 
 
     }
-    // "Notify" Model --> Controller
+    public int getAge() {
+        return age;
+    }
+    public float getValeurMesuree() {
+        return valeurMesuree;
+    }
+    public boolean isFasting() {
+        return isFasting;
+    }
 
-    public  String getReponse() {
+    public Date getDate() {
+        return dateMesure;
+    }
+
+
+    //Flèche "Notify" Model --> Controller
+    public String getReponse() {
         return reponse;
     }
 
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setValeurMesuree(float valeurMesuree) {
+        this.valeurMesuree = valeurMesuree;
+    }
+
+    public void setFasting(boolean fasting) {
+        isFasting = fasting;
+    }
+
+    /**
+     * conversion du patient en format JSONArray
+     * @return
+     */
+    public JSONArray convertToJSONArray (){
+        List laListe = new ArrayList<>();
+        laListe.add(dateMesure);
+        laListe.add(age);
+        laListe.add(isFasting);
+        laListe.add(valeurMesuree);
+        return new JSONArray(laListe);
+    }
+
+
+
 }
+
 
 
 

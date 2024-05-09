@@ -20,27 +20,34 @@ public class ConsultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consult);
+        setContentView(R.layout.activity_consult); // Set the layout for this activity
 
+        // Retrieve the Intent that started this activity
         Intent intent = getIntent();
+
+        // Extract the string extra from the Intent
         reponse = intent.getStringExtra(RESPONSE_KEY);
+
+        // Set the extracted response string to the TextView
         tvReponse.setText(reponse);
 
+        // Set OnClickListener for the btnRetour Button
         btnRetour.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(); // Create a new Intent
 
-        public void onClick(View v){
-            Intent intent = new Intent();
-            if (reponse == null)
-                setResult(RESULT_CANCELED, intent);
-            else
-                setResult(RESULT_OK, intent);
-            finish();
-        }
+                // Check if response string is null
+                if (reponse == null)
+                    setResult(RESULT_CANCELED, intent); // Set result as canceled
+                else
+                    setResult(RESULT_OK, intent); // Set result as OK
 
+                finish(); // Finish this activity
+            }
         });
 
-        init();
+        init(); // Call the init() method
     }
     private void init(){
         tvReponse = findViewById(R.id.tvReponse);
